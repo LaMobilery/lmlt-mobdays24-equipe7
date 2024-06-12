@@ -69,30 +69,6 @@
   padding: 4rem 0;
 }
 
-.center::before {
-  background: var(--secondary-glow);
-  border-radius: 50%;
-  width: 480px;
-  height: 360px;
-  margin-left: -400px;
-}
-
-.center::after {
-  background: var(--primary-glow);
-  width: 240px;
-  height: 180px;
-  z-index: -1;
-}
-
-.center::before,
-.center::after {
-  content: "";
-  left: 50%;
-  position: absolute;
-  filter: blur(45px);
-  transform: translateZ(0);
-}
-
 .logo {
   position: relative;
 }
@@ -208,3 +184,88 @@
     transform: rotate(0deg);
   }
 }
+
+/* ------------------------------------------------ START ANSWER CSS -------------------------------------------------*/
+.answer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #090732;
+  color: white;
+}
+
+.form {
+  width: 40%;
+}
+
+.container {
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Three columns with equal width */
+  grid-gap: 30px; /* Gap between grid items */
+}
+
+.input {
+  display:inline-block;
+  width: 100%;
+  position: relative;
+  margin-bottom: 20px;
+  height: 40px;
+  border-radius: 25px;
+  padding: 24px;
+  border: unset;
+}
+
+.answerTitle {
+  color: white;
+  display: flex;
+  bottom: 10px;
+  position: relative;
+}
+
+.item {
+  color: white;
+  font-size: 14px;
+  background: linear-gradient(#FFA726, #FB8C00);
+  padding: 18px 30px;
+  border: unset;
+  border-radius: 25px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  display: flex;
+  box-sizing:border-box;
+}
+
+.inline {
+  display:inline-block;
+}
+
+.icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  padding: 4px;
+  position: absolute;
+  box-sizing:border-box;
+  left:2px;
+  transform: translateY(-50%);
+}
+.search {
+  position: relative;
+  margin: 0 auto ;
+  text-align: center;
+}
+
+.faSearch {
+  position: absolute;
+  top: 33px;
+  left: 92%;
+  z-index: 1;
+  cursor: pointer;
+}
+
+
+/* ------------------------------------------------ END ANSWER CSS ---------------------------------------------------*/
