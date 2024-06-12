@@ -53,7 +53,7 @@ export default function Home() {
           <Image src="/logo.png" width={logoSize} height={logoSize} alt="logo wizard" />
         </div>
         <h1 className={styles.title}>CVWizard</h1>
-        <p>Wingardium Leviosaaaaaa</p>
+        <p>Une potion de suc' pour briller</p>
       </div>
       {questions.map(
         (question, i) =>
