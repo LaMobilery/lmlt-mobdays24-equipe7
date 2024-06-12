@@ -9,9 +9,21 @@ export default function Home() {
       <div className={styles.logo}>
         <Image src="/logo.png" width={492} height={492} alt="logo wizard" />
       </div>
-      <div>
-        <h2>C'est la première question</h2>
-        <input type="text" name="test" />
+      <div className={styles.questionBlock}>
+        <h2>C'est la première question ?</h2>
+        <input type="text" name="test" className={styles.answerInput} />
+      </div>
+      <div className={styles.questionBlock}>
+        <h2>C'est la première question ?</h2>
+        <input type="text" name="test" className={styles.answerInput} />
+      </div>
+      <div className={styles.questionBlock}>
+        <h2>C'est la première question ?</h2>
+        <input type="text" name="test" className={styles.answerInput} />
+      </div>
+      <div className={styles.questionBlock}>
+        <h2>C'est la première question ?</h2>
+        <input type="text" name="test" className={styles.answerInput} />
       </div>
     </main>
   );
