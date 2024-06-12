@@ -48,7 +48,7 @@ export default function Page() {
         <form>
           {formData.map((item, index) => (
             <div className={ styles.search } key={ index }>
-              <label className={ styles.title }>{ item.title }</label>
+              <label className={ styles.answerTitle }>{ item.title }</label>
               <div onClick={ () => handleCopy(index) }>
                 <Image
                   className={ styles.faSearch }
