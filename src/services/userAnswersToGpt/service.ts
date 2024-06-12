@@ -25,14 +25,14 @@ export const userAnswersToGpt = async ({
 
     console.log("heeerre");
 
-    const response = (await http.post(
+    const response = await http.post<GptResponse>(
       window.location.origin + ENDPOINTS.USER_ANSWERS_TO_GPT,
       {
         ...requestBody,
       }
-    )) as unknown as GptResponse;
+    );
 
-    return response;
+    return response.data;
   } catch (error) {
     const errorMessage = JSON.stringify(error);
 

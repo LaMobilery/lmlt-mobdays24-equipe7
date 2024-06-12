@@ -8,7 +8,7 @@ import { fromUserInputsToUserAnswersToGpt } from "@/utils/fromUserInputsToUserAn
 import { userAnswersToGpt } from "@/services/userAnswersToGpt/service";
 import toast, { Toaster } from "react-hot-toast";
 import { useLoading } from "@/contexts/loading/context";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export type CvForm = Array<{
   question: string;
@@ -18,6 +18,7 @@ export type CvForm = Array<{
 
 export default function Home() {
   const logoSize = document.body.clientWidth / 4;
+  const router = useRouter();
 
   const questionMock: CvForm = [
     /**
@@ -89,6 +90,10 @@ export default function Home() {
     try {
       const response = await userAnswersToGpt(body);
       toast.success("Ché bon", { position: "bottom-center" });
+      if (response) {
+        const queryParams = new URLSearchParams(Object.entries(response));
+        router.push(`/answer?${queryParams.toString()}`);
+      }
     } catch (error) {
       toast.error(
         "Oups, quelqu'un a oublié d'allumer son ordinateur dans l'océan",
