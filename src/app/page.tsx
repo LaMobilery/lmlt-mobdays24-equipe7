@@ -3,38 +3,73 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { useState } from "react";
+import { GptRequestBody } from "./types/gpt";
+import { fromUserInputsToUserAnswersToGpt } from "@/utils/fromUserInputsToUserAnswersToGpt/util";
+import { userAnswersToGpt } from "@/services/userAnswersToGpt/service";
+import toast, { Toaster } from "react-hot-toast";
+import { useLoading } from "@/contexts/loading/context";
+import { useRouter } from "next/router";
+
+export type CvForm = Array<{
+  question: string;
+  answer: string;
+  type: `${keyof GptRequestBody}-${number}`;
+}>;
 
 export default function Home() {
   const logoSize = document.body.clientWidth / 4;
 
-  const questionMock = [
+  const questionMock: CvForm = [
+    /**
+ *      clientName,
+    missionDescription,
+      featuresList,
+      methods,
+      role,
+      techsList,
+ */
     {
-      question: "Pour quel client as-tu réalisé ta mission ?",
+      question:
+        "Pour quel client as-tu réalisé ta mission ? (Decathlon, Kiabi, Bonduelle, etc.)",
       answer: "",
+      type: "clientName-0",
     },
     {
-      question: "Explique brièvement le métier de ton client.",
+      question:
+        "Explique brièvement le métier de ton client (gestionnaire de flottes, association d'aide aux malvoyants, etc.)",
       answer: "",
+      type: "missionDescription-0",
     },
     {
-      question: "Quel a été ton rôle dans cette mission ?",
+      question:
+        "Quelles fonctionnalités as-tu implémentées ou aidé à implémenter ? (login, checkout, dashboard, etc.)",
       answer: "",
+      type: "featuresList-0",
     },
     {
-      question: "A quelle période ?",
+      question:
+        "Est-ce que tu as travaillé avec certaines méthodologies de gestion de projet ? (SCRUM, Kanban, etc.)",
       answer: "",
+      type: "methods-0",
     },
     {
-      question: "Liste la liste des fonctionnalités auxquelles tu as contribué",
+      question:
+        "Quel a été ton rôle dans cette mission ? (développeur front, back, lead dev')",
       answer: "",
+      type: "role-0",
+    },
+
+    {
+      question:
+        "Liste les technologies et outils que tu as utilisés (AWS, React, Postgres, etc.)",
+      answer: "",
+      type: "techsList-0",
     },
     {
-      question: "Liste les technologies, outils et/ou méthodes que tu as utilisé",
+      question:
+        "Côté code, quelles bonnes pratiques as-tu pu mettre en oeuvre ou découvrir ? (tests unitaires, clean archi, etc.)",
       answer: "",
-    },
-    {
-      question: "Quelles bonnes pratiques as-tu pu mettre en oeuvre ou découvrir ?",
-      answer: "",
+      type: "techsList-1",
     },
   ];
 
@@ -46,14 +81,37 @@ export default function Home() {
     setQuestions(newQuestions);
   };
 
+  const { setLoading } = useLoading();
+
+  const onSubmit = async () => {
+    setLoading(true);
+    const body = fromUserInputsToUserAnswersToGpt(questions);
+    try {
+      const response = await userAnswersToGpt(body);
+      toast.success("Ché bon", { position: "bottom-center" });
+    } catch (error) {
+      toast.error(
+        "Oups, quelqu'un a oublié d'allumer son ordinateur dans l'océan",
+        { position: "bottom-center" }
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.mainBlock}>
         <div className={styles.logo} style={{ marginTop: logoSize / 1.6 }}>
-          <Image src="/logo.png" width={logoSize} height={logoSize} alt="logo wizard" />
+          <Image
+            src="/logo.png"
+            width={logoSize}
+            height={logoSize}
+            alt="logo wizard"
+          />
         </div>
         <h1 className={styles.title}>CVWizard</h1>
-        <p>Une potion de suc' pour briller</p>
+        <p>Une potion de suc&apos; pour briller</p>
       </div>
       {questions.map(
         (question, i) =>
@@ -65,13 +123,14 @@ export default function Home() {
                 name={`q${i}`}
                 className={styles.answerInput}
                 value={question.answer}
-                onChange={e => handleQuestion(i, e.target.value)}
+                onChange={(e) => handleQuestion(i, e.target.value)}
               />
             </div>
           )
       )}
 
-      <button>Wazaaa !</button>
+      <button onClick={onSubmit}>Wazaaa !</button>
+      <Toaster />
     </main>
   );
 }

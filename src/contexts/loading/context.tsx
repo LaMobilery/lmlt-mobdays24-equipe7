@@ -46,7 +46,7 @@ export const LoadingProvider = ({
             autoplay
             loop
             src={Loading}
-            style={{ height: "300px", width: "300px" }}
+            style={{ height: "400px", width: "400px" }}
           />
         </div>
       )}

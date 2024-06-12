@@ -1,5 +1,9 @@
 import { ENDPOINTS } from "@/api/config";
 import { GptRequestBody, GptResponse } from "@/app/types/gpt";
+import http from "axios";
+
+export type UserAnswersToGptArgs = GptRequestBody;
+export type UserAnswersToGptResponse = GptResponse;
 
 export const userAnswersToGpt = async ({
   clientName,
@@ -8,10 +12,7 @@ export const userAnswersToGpt = async ({
   missionDescription,
   role,
   techsList,
-}: GptRequestBody): Promise<{
-  status: "success" | "error";
-  response: GptResponse | string;
-}> => {
+}: UserAnswersToGptArgs): Promise<UserAnswersToGptResponse | void> => {
   try {
     const requestBody = {
       clientName,
@@ -22,18 +23,21 @@ export const userAnswersToGpt = async ({
       techsList,
     };
 
-    const response = (await fetch(ENDPOINTS.USER_ANSWERS_TO_GPT, {
-      body: JSON.stringify(requestBody),
-    })) as unknown as GptResponse;
+    console.log("heeerre");
 
-    return { status: "success", response };
+    const response = (await http.post(
+      window.location.origin + ENDPOINTS.USER_ANSWERS_TO_GPT,
+      {
+        ...requestBody,
+      }
+    )) as unknown as GptResponse;
+
+    return response;
   } catch (error) {
     const errorMessage = JSON.stringify(error);
 
     console.error(`An error ocurred, show this to an adult: ${errorMessage}`);
-    return {
-      status: "error",
-      response: errorMessage,
-    };
+
+    throw new Error(error as string);
   }
 };

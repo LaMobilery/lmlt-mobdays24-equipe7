@@ -9,6 +9,8 @@ export async function POST(request: Request): Promise<GptResponse | unknown> {
   const body: GptRequestBody = await request.json();
   const errors = Validators.GptBodyValidator(body as GptRequestBody);
 
+  console.log("🍎", { errors });
+
   if (errors.length > 0) {
     return new Response(errors.join(", "), {
       status: 400,
