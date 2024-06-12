@@ -109,14 +109,13 @@ export default function Home() {
       <div className={styles.mainBlock}>
         <div className={styles.logo} style={{ marginTop: logoSize / 1.6 }}>
           <Image
-            src="/logo.png"
+            src="/logo_txt.png"
             width={logoSize}
             height={logoSize}
             alt="logo wizard"
           />
         </div>
-        <h1 className={styles.title}>CVWizard</h1>
-        <p>Une potion de suc&apos; pour briller</p>
+        <h3>Une potion de suc&apos; pour briller</h3>
       </div>
       {questions.map(
         (question, i) =>
