@@ -10,8 +10,15 @@
   min-height: 100vh;
 }
 
-.logo {
-  margin-top: 16rem;
+.mainBlock {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-top: 3rem;
 }
 
 .questionBlock {
