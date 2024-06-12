@@ -2,9 +2,49 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
+import { useState } from "react";
 
 export default function Home() {
   const logoSize = document.body.clientWidth / 4;
+
+  const questionMock = [
+    {
+      question: "Pour quel client as-tu réalisé ta mission ?",
+      answer: "",
+    },
+    {
+      question: "Explique brièvement le métier de ton client.",
+      answer: "",
+    },
+    {
+      question: "Quel a été ton rôle dans cette mission ?",
+      answer: "",
+    },
+    {
+      question: "A quelle période ?",
+      answer: "",
+    },
+    {
+      question: "Liste la liste des fonctionnalités auxquelles tu as contribué",
+      answer: "",
+    },
+    {
+      question: "Liste les technologies, outils et/ou méthodes que tu as utilisé",
+      answer: "",
+    },
+    {
+      question: "Quelles bonnes pratiques as-tu pu mettre en oeuvre ou découvrir ?",
+      answer: "",
+    },
+  ];
+
+  const [questions, setQuestions] = useState(questionMock);
+
+  const handleQuestion = (i: number, answer: string) => {
+    const newQuestions = [...questions];
+    newQuestions[i].answer = answer;
+    setQuestions(newQuestions);
+  };
 
   return (
     <main className={styles.main}>
@@ -15,34 +55,22 @@ export default function Home() {
         <h1 className={styles.title}>CVWizard</h1>
         <p>Wingardium Leviosaaaaaa</p>
       </div>
-      <div className={styles.questionBlock}>
-        <h2>Pour quel client as-tu réalisé ta mission ?</h2>
-        <input type="text" name="q1" className={styles.answerInput} />
-      </div>
-      <div className={styles.questionBlock}>
-        <h2>Explique brièvement le métier de ton client.</h2>
-        <input type="text" name="q2" className={styles.answerInput} />
-      </div>
-      <div className={styles.questionBlock}>
-        <h2>Quel a été ton rôle dans cette mission ?</h2>
-        <input type="text" name="q3" className={styles.answerInput} />
-      </div>
-      <div className={styles.questionBlock}>
-        <h2>A quelle période ?</h2>
-        <input type="text" name="q4" className={styles.answerInput} />
-      </div>
-      <div className={styles.questionBlock}>
-        <h2>Liste la liste des fonctionnalités auxquelles tu as contribué</h2>
-        <input type="text" name="q5" className={styles.answerInput} />
-      </div>
-      <div className={styles.questionBlock}>
-        <h2>Liste les technologies, outils et/ou méthodes que tu as utilisé</h2>
-        <input type="text" name="q6" className={styles.answerInput} />
-      </div>
-      <div className={styles.questionBlock}>
-        <h2>Quelles bonnes pratiques as-tu pu mettre en oeuvre ou découvrir ?</h2>
-        <input type="text" name="q7" className={styles.answerInput} />
-      </div>
+      {questions.map(
+        (question, i) =>
+          questions[i - 1]?.answer !== "" && (
+            <div className={styles.questionBlock} key={question.question}>
+              <h2>{question.question}</h2>
+              <input
+                type="text"
+                name={`q${i}`}
+                className={styles.answerInput}
+                value={question.answer}
+                onChange={e => handleQuestion(i, e.target.value)}
+              />
+            </div>
+          )
+      )}
+
       <button>Wazaaa !</button>
     </main>
   );
