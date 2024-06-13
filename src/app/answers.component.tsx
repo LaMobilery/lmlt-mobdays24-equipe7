@@ -81,7 +81,7 @@ export default function Page() {
   useEffect(() => {
     const handleKeyPress = (event: { key: string; }) => {
       if (event.key === 'k') {
-        router.push('/karaoke/player');
+        router.push('/karaoke');
       }
     };
 
