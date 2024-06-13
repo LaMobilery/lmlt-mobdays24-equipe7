@@ -10,7 +10,7 @@ export default function Page() {
     height: '600',
     width: '1000',
     playerVars: {
-      autoplay: 1,
+      autoplay: 0,
     },
   };
 
