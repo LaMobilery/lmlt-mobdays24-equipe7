@@ -3,13 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { SyntheticEvent, useRef, useState } from 'react';
+import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import styles from "../app/page.module.css";
 import { useLoading } from "@/contexts/loading/context";
 import { userAnswersToGpt } from "@/services/userAnswersToGpt/service";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function Page() {
+  const router = useRouter();
   const [_, setCopied] = useState(false);
 
   const searchParams = useSearchParams();
@@ -77,12 +78,19 @@ export default function Page() {
     }
   };
 
-  const textRef = useRef<any>();
-  const onChangeHandler = function(e: SyntheticEvent) {
-    const target = e.target as HTMLTextAreaElement;
-    textRef.current.style.height = "30px";
-    textRef.current.style.height = `${target.scrollHeight}px`;
-  };
+  useEffect(() => {
+    const handleKeyPress = (event: { key: string; }) => {
+      if (event.key === 'k') {
+        router.push('/karaoke');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [router]);
 
   return (
     <main className={ styles.answerMain }>

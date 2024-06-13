@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import React from "react";
+import React, { useEffect, useState } from 'react';
+import Logo from "../../public/logo_txt.png";
 import { GptRequestBody } from "./types/gpt";
 import { Toaster } from "react-hot-toast";
 import Baseline from "./baseline.component";
