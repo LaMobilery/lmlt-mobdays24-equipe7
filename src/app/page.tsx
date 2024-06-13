@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import Logo from "../../public/logo_txt.png";
 import { GptRequestBody } from "./types/gpt";
 import { fromUserInputsToUserAnswersToGpt } from "@/utils/fromUserInputsToUserAnswersToGpt/util";
 import { userAnswersToGpt } from "@/services/userAnswersToGpt/service";
@@ -109,7 +110,7 @@ export default function Home() {
       <div className={styles.mainBlock}>
         <div className={styles.logo} style={{ marginTop: logoSize / 1.6 }}>
           <Image
-            src="/logo_txt.png"
+            src={Logo}
             width={logoSize}
             height={logoSize}
             alt="logo wizard"
@@ -130,7 +131,7 @@ export default function Home() {
                   name={`q${i}`}
                   className={styles.answerInput}
                   value={question.answer}
-                  onChange={e => handleQuestion(i, e.target.value)}
+                  onChange={(e) => handleQuestion(i, e.target.value)}
                 />
               </div>
             </div>

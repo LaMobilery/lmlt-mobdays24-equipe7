@@ -142,7 +142,11 @@
     border-radius: 0;
     border: none;
     border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
-    background: linear-gradient(to bottom, rgba(var(--background-start-rgb), 1), rgba(var(--callout-rgb), 0.5));
+    background: linear-gradient(
+      to bottom,
+      rgba(var(--background-start-rgb), 1),
+      rgba(var(--callout-rgb), 0.5)
+    );
     background-clip: padding-box;
     backdrop-filter: blur(24px);
   }
@@ -153,7 +157,11 @@
     inset: auto 0 0;
     padding: 2rem;
     height: 200px;
-    background: linear-gradient(to bottom, transparent 0%, rgb(var(--background-end-rgb)) 40%);
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(var(--background-end-rgb)) 40%
+    );
     z-index: 1;
   }
 }
@@ -162,16 +170,6 @@
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
     grid-template-columns: repeat(2, 50%);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .vercelLogo {
-    filter: invert(1);
-  }
-
-  .logo {
-    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
   }
 }
 
@@ -199,7 +197,6 @@
   z-index: 1;
   background-clip: padding-box;
   background-color: #08080c; /* Adjust to match the inner input background color */
-  color: white; /* Adjust the text color */
 }
 
 .inputBackground {
@@ -230,7 +227,6 @@
   align-items: center;
   min-height: 100vh;
   background-color: #090732;
-  color: white;
 }
 
 .form {
@@ -256,14 +252,12 @@
 }
 
 .answerTitle {
-  color: white;
   display: flex;
   bottom: 10px;
   position: relative;
 }
 
 .item {
-  color: white;
   font-size: 14px;
   background: linear-gradient(#ffa726, #fb8c00);
   padding: 18px 30px;
