@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import styles from "./page.module.css";
+import React, { SyntheticEvent, useRef, useState } from 'react';
+import styles from "../app/page.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function Answers() {
+export default function Page() {
   const [_, setCopied] = useState(false);
   const searchParams = useSearchParams();
 
@@ -27,62 +27,75 @@ export default function Answers() {
   };
 
   const handleCopy = (index: number) => {
-    const fieldValue = formData[index].answer as string;
-    navigator.clipboard
-      .writeText(fieldValue)
-      .then(() => {
-        console.log(fieldValue);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000); // Reset copied state after 2 seconds
-      })
-      .catch((error) => console.error("Failed to copy:", error));
+    const fieldValue = formData[index].answer;
+    if (typeof fieldValue === 'string') {
+      navigator.clipboard
+        .writeText(fieldValue)
+        .then(() => {
+          console.log(fieldValue);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000); // Reset copied state after 2 seconds
+        })
+        .catch((error) => console.error('Failed to copy:', error));
+    }
   };
 
-  const handleChange = (index: number, newValue: string) => {
-    setFormData((prevFormData) => {
-      const updatedFormData = [...prevFormData];
-      updatedFormData[index].answer = newValue;
-      return updatedFormData;
-    });
+  const textRef = useRef<any>();
+  const onChangeHandler = function(e: SyntheticEvent) {
+    const target = e.target as HTMLTextAreaElement;
+    textRef.current.style.height = "30px";
+    textRef.current.style.height = `${target.scrollHeight}px`;
   };
 
   return (
-    <main className={styles.answer}>
-      <div className={styles.form}>
-        <h1 className={styles.center}>CV WIZARD</h1>
+    <main className={ styles.answerMain }>
+
+      <Image
+        className={ styles.answerBeta }
+        src="/now_in_beta.png"
+        alt="beta"
+        width={160}
+        height={160}
+        priority
+      />
+
+      <div className={ styles.answerBlock }>
+        <Image
+          className={ styles.answerLogoHeader }
+          src="/logo_detoured.png"
+          alt="CVWizard"
+          width={250}
+          height={250}
+          priority
+        />
 
         <form>
           {formData.map((item, index) => (
-            <div className={styles.search} key={index}>
+            <div className={styles.answerLoop} key={index}>
               <label className={styles.answerTitle}>{item.title}</label>
               <div onClick={() => handleCopy(index)}>
                 <Image
-                  className={styles.faSearch}
-                  src="/deposer.png"
+                  className={styles.answerCopy}
+                  src="/copy.svg"
                   alt="Copy Icon"
                   width={20}
                   height={20}
-                  priority
                 />
               </div>
-              <input
-                className={styles.input}
-                type="text"
-                value={item.answer || ""}
-                name={`result${index + 1}`}
-                onChange={(e) => handleChange(index, e.target.value)}
-              />
+              <div>
+                <div className={ styles.answerInput }>{item.answer ?? ''}</div>
+              </div>
             </div>
           ))}
         </form>
 
-        <div className={styles.container}>
-          <Link href="/" className={styles.item}>
-            Retour
-          </Link>
-          <button className={styles.item} onClick={send}>
-            Envoyer
+        <div className={styles.answerBottom}>
+          <button className={styles.buttonLink2} onClick={send}>
+            RECOMMENCER 🪄
           </button>
+          <Link href="/" className={styles.buttonLink1}>
+            RETOUR
+          </Link>
         </div>
       </div>
     </main>
