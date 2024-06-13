@@ -35,6 +35,7 @@
   font-family: "LemonMilk";
   color: white;
   text-align: center;
+  margin-top: 40px;
 }
 
 .answerInput {
@@ -211,6 +212,7 @@
 
 .inputContainer > input {
   font-size: 20px;
+  color: white;
   border: 4px solid transparent;
   border-radius: 25px; /* Adjust to match the rounded corners */
   position: relative;
@@ -347,6 +349,14 @@
   display: flex;
   box-sizing:border-box;
   box-shadow: 5px 5px 0 rgba(9, 7, 50, 1);
+}
+
+.video {
+  margin-bottom: 40px;
+}
+
+.lastVideo {
+  margin-bottom: 100px;
 }
 
 /* ------------------------------------------------ END ANSWER CSS ---------------------------------------------------*/

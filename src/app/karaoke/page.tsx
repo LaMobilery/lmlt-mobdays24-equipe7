@@ -36,7 +36,9 @@ export default function Page() {
           priority
         />
 
-        <YouTube videoId={'HbDLzCVsTSg'} opts={opts} />
+        <YouTube className={styles.video} videoId={'HbDLzCVsTSg'} opts={opts} />
+        <YouTube className={styles.video} videoId={'1MMH-1UMN40'} opts={opts} />
+        <YouTube className={styles.lastVideo} videoId={'jyRB5WFmTAM'} opts={opts} />
 
       </div>
     </main>
