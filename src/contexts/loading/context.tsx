@@ -30,7 +30,7 @@ export const LoadingProvider = ({ children }: { children: React.ReactNode }) => 
             position: "fixed",
             top: 0,
             right: 0,
-            backgroundColor: "rgba(0,0,0,.8)",
+            backgroundColor: "#090732cc",
             width: "100%",
             height: "100vh",
             display: "flex",
