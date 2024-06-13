@@ -138,7 +138,7 @@ export default function Home() {
           )
       )}
 
-      <button onClick={onSubmit}>Wazaaa !</button>
+      <button className={styles.buttonLink1} onClick={onSubmit}>DO YOUR MAGIC THING 🪄  </button>
       <Toaster />
     </main>
   );
