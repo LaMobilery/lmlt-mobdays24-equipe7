@@ -80,6 +80,7 @@ export async function POST(request: Request): Promise<GptResponse | any> {
       .replace("```", "");
        content = JSON.parse(replaced);
     } catch (error) {
+      console.log("🚀 ~ POST ~ error:", error)
       return new Response(JSON.stringify({
         error: "Invalid response from GPT",
         errorName: "InvalidResponse",
