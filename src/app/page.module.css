@@ -366,6 +366,7 @@
 }
 
 .buttonLink1:disabled {
+  cursor: not-allowed;
   border: 3px solid rgba(9, 7, 50, 1);
   box-shadow: 5px 5px 0 rgba(58, 49, 133, 1);
   background: linear-gradient(
