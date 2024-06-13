@@ -80,7 +80,7 @@ export default function Page() {
                   alt="Copy Icon"
                   width={20}
                   height={20}
-                  priority
+                  priorityg
                 />
               </div>
               <div>
@@ -90,13 +90,13 @@ export default function Page() {
           ))}
         </form>
 
-        <div className={ styles.answerBottom }>
-          <Link href="/" className={ styles.buttonLink1 }>
+        <div className={styles.answerBottom}>
+          <button className={styles.buttonLink2} onClick={send}>
             RECOMMENCER 🪄
-          </Link>
-          <button className={ styles.buttonLink2 } onClick={send}>
-            RETOUR
           </button>
+          <Link href="/" className={styles.buttonLink1}>
+            RETOUR
+          </Link>
         </div>
       </div>
     </main>
