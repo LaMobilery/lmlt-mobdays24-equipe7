@@ -92,7 +92,7 @@ export default function Home() {
       const response = await userAnswersToGpt(body);
       toast.success("Ché bon", { position: "bottom-center" });
       if (response) {
-        const queryParams = new URLSearchParams(Object.entries(response));
+        const queryParams = new URLSearchParams(Object.entries({...response, ...body}));
         router.push(`/answer?${queryParams.toString()}`);
       }
     } catch (error) {
@@ -137,6 +137,7 @@ export default function Home() {
                 <div className={styles.inputContainer}>
                   <div className={styles.inputBackground}/>
                   <input
+                  autoComplete="off"
                     type="text"
                     name={`q${i}`}
                     className={styles.answerInput}

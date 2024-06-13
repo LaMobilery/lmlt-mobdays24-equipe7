@@ -1,13 +1,17 @@
 "use client";
 
-import React, { SyntheticEvent, useRef, useState } from 'react';
-import styles from "../app/page.module.css";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { SyntheticEvent, useRef, useState } from 'react';
+import styles from "../app/page.module.css";
+import { useLoading } from "@/contexts/loading/context";
+import { userAnswersToGpt } from "@/services/userAnswersToGpt/service";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Page() {
   const [_, setCopied] = useState(false);
+
   const searchParams = useSearchParams();
 
   const [formData, setFormData] = useState([
@@ -21,9 +25,42 @@ export default function Page() {
       answer: searchParams.get("technos"),
     },
   ]);
+  const { setLoading } = useLoading();
 
-  const send = () => {
-    console.log("Button clicked!");
+  const send = async () => {
+
+    const body = {
+      clientName: searchParams.get("clientName")||"",
+      featuresList: searchParams.get("featuresList")||"",
+      methods: searchParams.get("methods")||"",
+      missionDescription: searchParams.get("missionDescription")||"",
+      role: searchParams.get("role")||"",
+      techsList: searchParams.get("techsList")||"",
+    };
+    if (body.clientName === "" || body.featuresList === "" || body.methods === "" || body.missionDescription === "" || body.role === "" || body.techsList === "") {
+
+      toast.error("Il manque des informations pour générer le CV", { position: "bottom-center" });
+      return;
+    }
+      setLoading(true);
+      try {
+        const response = await userAnswersToGpt(body);
+        toast.success("Ché bon", { position: "bottom-center" });
+        if (response) {
+          setFormData([
+            { title: "Le(s) projet(s) :", answer: response.project },
+            { title: "La mission & activités & fonctions :", answer: response.mission },
+            { title: "Les technologies & outils & méthodes", answer: response.technos },
+          ]);
+        }
+      } catch (error) {
+        toast.error(
+          "Oups, quelqu'un a oublié d'allumer son ordinateur dans l'océan",
+          { position: "bottom-center" }
+        );
+      } finally {
+        setLoading(false);
+      }
   };
 
   const handleCopy = (index: number) => {
@@ -83,7 +120,7 @@ export default function Page() {
                 />
               </div>
               <div>
-                <div className={ styles.answerInput }>{item.answer ?? ''}</div>
+                <div className={ styles.responseInput }>{item.answer ?? ''}</div>
               </div>
             </div>
           ))}
@@ -98,6 +135,8 @@ export default function Page() {
           </Link>
         </div>
       </div>
+      <Toaster/>
+
     </main>
   );
 }
