@@ -1,7 +1,7 @@
 "use client";
 
 import React, { SyntheticEvent, useRef, useState } from 'react';
-import styles from "../page.module.css";
+import styles from "../app/page.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -80,7 +80,6 @@ export default function Page() {
                   alt="Copy Icon"
                   width={20}
                   height={20}
-                  priorityg
                 />
               </div>
               <div>
