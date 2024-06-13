@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import Logo from "../../public/logo_txt.png";
 import { GptRequestBody } from "./types/gpt";
 import { fromUserInputsToUserAnswersToGpt } from "@/utils/fromUserInputsToUserAnswersToGpt/util";
