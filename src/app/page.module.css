@@ -30,7 +30,6 @@
 .answerInput {
   width: 80vw;
   padding: 1rem;
-  margin-top: 1rem;
   border-radius: 2rem;
   border: none;
 }
@@ -185,6 +184,44 @@
   }
 }
 
+.inputContainer {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 25px;
+}
+
+.inputContainer > input {
+  font-size: 20px;
+  border: 4px solid transparent;
+  border-radius: 25px; /* Adjust to match the rounded corners */
+  position: relative;
+  z-index: 1;
+  background-clip: padding-box;
+  background-color: #08080c; /* Adjust to match the inner input background color */
+  color: white; /* Adjust the text color */
+}
+
+.inputBackground {
+  background: linear-gradient(90deg, orange, purple, orange);
+  width: 100vw;
+  height: 100vw;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  position: absolute;
+  animation: border-rotate 3s linear infinite;
+}
+
+@keyframes border-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* ------------------------------------------------ START ANSWER CSS -------------------------------------------------*/
 .answer {
   display: flex;
@@ -208,7 +245,7 @@
 }
 
 .input {
-  display:inline-block;
+  display: inline-block;
   width: 100%;
   position: relative;
   margin-bottom: 20px;
@@ -228,7 +265,7 @@
 .item {
   color: white;
   font-size: 14px;
-  background: linear-gradient(#FFA726, #FB8C00);
+  background: linear-gradient(#ffa726, #fb8c00);
   padding: 18px 30px;
   border: unset;
   border-radius: 25px;
@@ -237,11 +274,11 @@
   align-items: center;
   font-weight: bold;
   display: flex;
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 .inline {
-  display:inline-block;
+  display: inline-block;
 }
 
 .icon {
@@ -249,13 +286,13 @@
   width: 1.5rem;
   padding: 4px;
   position: absolute;
-  box-sizing:border-box;
-  left:2px;
+  box-sizing: border-box;
+  left: 2px;
   transform: translateY(-50%);
 }
 .search {
   position: relative;
-  margin: 0 auto ;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -266,6 +303,5 @@
   z-index: 1;
   cursor: pointer;
 }
-
 
 /* ------------------------------------------------ END ANSWER CSS ---------------------------------------------------*/
