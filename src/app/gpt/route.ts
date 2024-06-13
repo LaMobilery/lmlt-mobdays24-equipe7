@@ -5,7 +5,8 @@ import { Validators } from "../utils/validation";
 
 export const dynamic = "force-dynamic"; // defaults to auto
 
-export async function POST(request: Request): Promise<GptResponse | unknown> {
+
+export async function POST(request: Request): Promise<GptResponse | any> {
   try {
     
     const body: GptRequestBody = await request.json();
