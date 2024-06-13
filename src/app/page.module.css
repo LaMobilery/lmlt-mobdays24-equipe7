@@ -29,7 +29,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to bottom, rgba(9, 7, 50, 0), rgba(9, 7, 50, 1), rgba(9, 7, 50, 1), rgba(9, 7, 50, 0));
+  background: linear-gradient(
+    to bottom,
+    rgba(9, 7, 50, 0),
+    rgba(9, 7, 50, 1),
+    rgba(9, 7, 50, 1),
+    rgba(9, 7, 50, 0)
+  );
 }
 
 .questionBlock {
@@ -43,17 +49,24 @@
   padding: 1rem;
   border-radius: 2rem;
   border: none;
-  background: linear-gradient(rgba(9, 7, 50, 1), rgba(9, 7, 50, 1)), linear-gradient(to right, rgba(251, 140, 0, 1), rgba(255, 167, 38, 1), rgba(171, 71, 188, 1), rgba(142, 36, 170, 1));
-
+  background: linear-gradient(rgba(9, 7, 50, 1), rgba(9, 7, 50, 1)),
+    linear-gradient(
+      to right,
+      rgba(251, 140, 0, 1),
+      rgba(255, 167, 38, 1),
+      rgba(171, 71, 188, 1),
+      rgba(142, 36, 170, 1)
+    );
 }
 .answerInput:focus {
   appearance: menulist-button;
   background-image: none !important;
-  background-color: light-dark(rgb(232, 240, 254), rgba(70, 90, 126, 0.4)) !important;
-  color: fieldtext !important;  
+  background-color: light-dark(
+    rgb(232, 240, 254),
+    rgba(70, 90, 126, 0.4)
+  ) !important;
+  color: fieldtext !important;
 }
-
-
 
 .grid {
   display: grid;
@@ -246,7 +259,13 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to right, rgba(58, 49, 133, 1), rgba(36, 30, 82, 1), rgba(36, 30, 82, 1), rgba(58, 49, 133, 1));
+  background: linear-gradient(
+    to right,
+    rgba(58, 49, 133, 1),
+    rgba(36, 30, 82, 1),
+    rgba(36, 30, 82, 1),
+    rgba(58, 49, 133, 1)
+  );
   color: white;
 }
 
@@ -276,7 +295,6 @@
   justify-content: left;
   width: 100%;
   display: flex;
-  
 }
 
 .responseInput {
@@ -288,7 +306,14 @@
   border-radius: 25px;
   padding: 24px;
   border: 3px solid transparent;
-  background-image: linear-gradient(rgba(9, 7, 50, 1), rgba(9, 7, 50, 1)), linear-gradient(to right, rgba(251, 140, 0, 1), rgba(255, 167, 38, 1), rgba(171, 71, 188, 1), rgba(142, 36, 170, 1));
+  background-image: linear-gradient(rgba(9, 7, 50, 1), rgba(9, 7, 50, 1)),
+    linear-gradient(
+      to right,
+      rgba(251, 140, 0, 1),
+      rgba(255, 167, 38, 1),
+      rgba(171, 71, 188, 1),
+      rgba(142, 36, 170, 1)
+    );
   background-origin: border-box;
   background-clip: padding-box, border-box;
 }
@@ -321,7 +346,13 @@
   color: rgba(9, 7, 50, 1);
   width: 315px;
   font-size: 14px;
-  background: linear-gradient(to right, rgba(251, 140, 0, 1), rgba(255, 167, 38, 1), rgba(171, 71, 188, 1), rgba(142, 36, 170, 1));
+  background: linear-gradient(
+    to right,
+    rgba(251, 140, 0, 1),
+    rgba(255, 167, 38, 1),
+    rgba(171, 71, 188, 1),
+    rgba(142, 36, 170, 1)
+  );
   padding: 18px 30px;
   border: 3px solid rgba(251, 140, 0, 1);
   border-radius: 25px;
@@ -329,9 +360,22 @@
   justify-content: center;
   align-items: center;
   display: flex;
-  box-sizing:border-box;
+  box-sizing: border-box;
   box-shadow: 5px 5px 0 rgba(9, 7, 50, 1);
 }
+
+.buttonLink1:disabled {
+  border: 3px solid rgba(9, 7, 50, 1);
+  box-shadow: 5px 5px 0 rgba(58, 49, 133, 1);
+  background: linear-gradient(
+    to right,
+    rgba(169, 169, 169, 1),
+    rgba(64, 64, 64, 1),
+    rgba(112, 128, 144, 1),
+    rgba(70, 70, 70, 1)
+  );
+}
+
 .buttonLink2 {
   font-family: "LemonMilk";
   margin-top: 20px;
@@ -346,8 +390,37 @@
   justify-content: center;
   align-items: center;
   display: flex;
-  box-sizing:border-box;
+  box-sizing: border-box;
   box-shadow: 5px 5px 0 rgba(9, 7, 50, 1);
+}
+
+.baseline {
+  background: linear-gradient(
+    to right,
+    rgba(255, 167, 38, 1),
+    rgba(251, 140, 0, 1),
+    rgba(142, 36, 170, 1),
+    rgba(9, 7, 50, 1)
+  );
+  background-size: 400% 400%;
+  animation: gradient 2s ease infinite;
+  border-radius: 3px;
+  padding-inline: 6px;
+  padding-block: 2px;
+
+  font-style: italic;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* ------------------------------------------------ END ANSWER CSS ---------------------------------------------------*/
