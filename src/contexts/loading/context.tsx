@@ -13,11 +13,7 @@ type LoadingContextType =
 const LoadingContext = createContext<LoadingContextType>(undefined);
 
 // Provider component
-export const LoadingProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const LoadingProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const setLoading = (isLoading: boolean) => {
@@ -31,7 +27,7 @@ export const LoadingProvider = ({
         <div
           style={{
             zIndex: 2,
-            position: "absolute",
+            position: "fixed",
             top: 0,
             right: 0,
             backgroundColor: "rgba(0,0,0,.8)",
@@ -42,12 +38,7 @@ export const LoadingProvider = ({
             justifyContent: "center",
           }}
         >
-          <Player
-            autoplay
-            loop
-            src={Loading}
-            style={{ height: "400px", width: "400px" }}
-          />
+          <Player autoplay loop src={Loading} style={{ height: "400px", width: "400px" }} />
         </div>
       )}
     </LoadingContext.Provider>
