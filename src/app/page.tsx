@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { GptRequestBody } from "./types/gpt";
 import { fromUserInputsToUserAnswersToGpt } from "@/utils/fromUserInputsToUserAnswersToGpt/util";
 import { userAnswersToGpt } from "@/services/userAnswersToGpt/service";
 import toast, { Toaster } from "react-hot-toast";
 import { useLoading } from "@/contexts/loading/context";
 import { useRouter } from "next/navigation";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 export type CvForm = Array<{
   question: string;
@@ -17,9 +18,9 @@ export type CvForm = Array<{
 }>;
 
 export default function Home() {
-  const logoSize = document.body.clientWidth / 4;
   const router = useRouter();
-
+  const { width: windowWidthSize } = useWindowSize();
+  const logoSize = windowWidthSize ? windowWidthSize / 4 : 0;
   const questionMock: CvForm = [
     /**
  *      clientName,
@@ -30,7 +31,8 @@ export default function Home() {
       techsList,
  */
     {
-      question: "Pour quel client as-tu réalisé ta mission ? (Decathlon, Kiabi, Bonduelle, etc.)",
+      question:
+        "Pour quel client as-tu réalisé ta mission ? (Decathlon, Kiabi, Bonduelle, etc.)",
       answer: "",
       type: "clientName-0",
     },
@@ -41,22 +43,26 @@ export default function Home() {
       type: "missionDescription-0",
     },
     {
-      question: "Quelles fonctionnalités as-tu implémentées ou aidé à implémenter ? (login, checkout, dashboard, etc.)",
+      question:
+        "Quelles fonctionnalités as-tu implémentées ou aidé à implémenter ? (login, checkout, dashboard, etc.)",
       answer: "",
       type: "featuresList-0",
     },
     {
-      question: "Est-ce que tu as travaillé avec certaines méthodologies de gestion de projet ? (SCRUM, Kanban, etc.)",
+      question:
+        "Est-ce que tu as travaillé avec certaines méthodologies de gestion de projet ? (SCRUM, Kanban, etc.)",
       answer: "",
       type: "methods-0",
     },
     {
-      question: "Quel a été ton rôle dans cette mission ? (développeur front, back, lead dev')",
+      question:
+        "Quel a été ton rôle dans cette mission ? (développeur front, back, lead dev')",
       answer: "",
       type: "role-0",
     },
     {
-      question: "Liste les technologies et outils que tu as utilisés (AWS, React, Postgres, etc.)",
+      question:
+        "Liste les technologies et outils que tu as utilisés (AWS, React, Postgres, etc.)",
       answer: "",
       type: "techsList-0",
     },
@@ -89,7 +95,10 @@ export default function Home() {
         router.push(`/answer?${queryParams.toString()}`);
       }
     } catch (error) {
-      toast.error("Oups, quelqu'un a oublié d'allumer son ordinateur dans l'océan", { position: "bottom-center" });
+      toast.error(
+        "Oups, quelqu'un a oublié d'allumer son ordinateur dans l'océan",
+        { position: "bottom-center" }
+      );
     } finally {
       setLoading(false);
     }
@@ -99,7 +108,12 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.mainBlock}>
         <div className={styles.logo} style={{ marginTop: logoSize / 1.6 }}>
-          <Image src="/logo_txt.png" width={logoSize} height={logoSize} alt="logo wizard" />
+          <Image
+            src="/logo_txt.png"
+            width={logoSize}
+            height={logoSize}
+            alt="logo wizard"
+          />
         </div>
         <h3>Une potion de suc&apos; pour briller</h3>
       </div>
@@ -108,6 +122,7 @@ export default function Home() {
           questions[i - 1]?.answer !== "" && (
             <div className={styles.questionBlock} key={question.question}>
               <h2>{question.question}</h2>
+
               <div className={styles.inputContainer}>
                 <div className={styles.inputBackground} />
                 <input

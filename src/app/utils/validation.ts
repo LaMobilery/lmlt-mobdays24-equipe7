@@ -1,5 +1,5 @@
 import { ValidationSchema } from '../schemas/gpt';
-import { GptRequestBody } from '../types/gpt';
+import { GptRequestBody, GptResponse } from '../types/gpt';
 
 function GptBodyValidator(data: GptRequestBody): Array<string> {
   const userSchema = new ValidationSchema<GptRequestBody>([
@@ -15,6 +15,7 @@ function GptBodyValidator(data: GptRequestBody): Array<string> {
   const errors = userSchema.validate(data);
   return errors;
 }
+
 
 export const Validators = {
     GptBodyValidator
