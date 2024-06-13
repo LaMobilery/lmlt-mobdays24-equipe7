@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Logo from "../../public/logo_txt.png";
 import { GptRequestBody } from "./types/gpt";
 import { fromUserInputsToUserAnswersToGpt } from "@/utils/fromUserInputsToUserAnswersToGpt/util";
@@ -107,8 +107,17 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      <Image
+        className={styles.answerBeta}
+        src="/now_in_beta.png"
+        alt="beta"
+        width={160}
+        height={160}
+        priority
+      />
+
       <div className={styles.mainBlock}>
-        <div className={styles.logo} style={{ marginTop: logoSize / 1.6 }}>
+        <div className={styles.logo} style={{marginTop: logoSize / 1.6}}>
           <Image
             src={Logo}
             width={logoSize}
@@ -118,28 +127,30 @@ export default function Home() {
         </div>
         <h3>Une potion de suc&apos; pour briller</h3>
       </div>
-      {questions.map(
-        (question, i) =>
-          questions[i - 1]?.answer !== "" && (
-            <div className={styles.questionBlock} key={question.question}>
-              <h2>{question.question}</h2>
+      <div className={styles.questionBackground}>
+        {questions.map(
+          (question, i) =>
+            questions[i - 1]?.answer !== "" && (
+              <div className={styles.questionBlock} key={question.question}>
+                <h2>{question.question}</h2>
 
-              <div className={styles.inputContainer}>
-                <div className={styles.inputBackground} />
-                <input
-                  type="text"
-                  name={`q${i}`}
-                  className={styles.answerInput}
-                  value={question.answer}
-                  onChange={(e) => handleQuestion(i, e.target.value)}
-                />
+                <div className={styles.inputContainer}>
+                  <div className={styles.inputBackground}/>
+                  <input
+                    type="text"
+                    name={`q${i}`}
+                    className={styles.answerInput}
+                    value={question.answer}
+                    onChange={(e) => handleQuestion(i, e.target.value)}
+                  />
+                </div>
               </div>
-            </div>
-          )
-      )}
+            )
+        )}
 
-      <button className={styles.buttonLink1} onClick={onSubmit}>DO YOUR MAGIC THING 🪄  </button>
-      <Toaster />
+        <button className={styles.buttonLink1} onClick={onSubmit}>DO YOUR MAGIC THING 🪄</button>
+      </div>
+      <Toaster/>
     </main>
   );
 }
