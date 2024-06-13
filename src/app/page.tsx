@@ -122,13 +122,17 @@ export default function Home() {
           questions[i - 1]?.answer !== "" && (
             <div className={styles.questionBlock} key={question.question}>
               <h2>{question.question}</h2>
-              <input
-                type="text"
-                name={`q${i}`}
-                className={styles.answerInput}
-                value={question.answer}
-                onChange={(e) => handleQuestion(i, e.target.value)}
-              />
+
+              <div className={styles.inputContainer}>
+                <div className={styles.inputBackground} />
+                <input
+                  type="text"
+                  name={`q${i}`}
+                  className={styles.answerInput}
+                  value={question.answer}
+                  onChange={e => handleQuestion(i, e.target.value)}
+                />
+              </div>
             </div>
           )
       )}
